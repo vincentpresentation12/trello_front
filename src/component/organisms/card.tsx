@@ -15,12 +15,14 @@ interface IProps {
   status: any;
   handleChangeStatus: any;
   handleDelete: any;
+  handleDeleteStatus: any;
 }
 
 const CardComponent = ({
   status,
   handleChangeStatus,
   handleDelete,
+  handleDeleteStatus,
 }: IProps) => {
   const [idStatus, setIdStatus] = useState([]);
   useEffect(() => {
@@ -35,8 +37,11 @@ const CardComponent = ({
         <Card width={"full"} key={idx}>
           <CardBody>
             <Stack mt="2" spacing="3">
-              <Heading textAlign={"center"} size="md">
-                {etat.name}
+              <Heading size="md" mb={5}>
+                <Flex justifyContent={"space-between"}>
+                  <Text ml={"35%"}>{etat.name}</Text>
+                  <AisTrash onClick={() => handleDeleteStatus(etat.id)} />
+                </Flex>
               </Heading>
               {etat.tasks.map((task: any, idx: number) => (
                 <Box key={idx}>
